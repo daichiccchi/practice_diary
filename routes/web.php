@@ -15,4 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('hello', 'HelloController');
+Route::get('hello', 'HelloController@index');
+Route::get('hello/other', 'HelloController@other');
+
+
