@@ -3,47 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-global $head, $style, $body, $end;
-$head = '<html><head>';
-$style = <<<E0F
-            <style>
-            body {font-size:16pt; color:#999;}
-            h1{ font-size:100pt; text-align:right; color:#eee;
-                margin:40px 0px -50px 0px; }
-            </style>
-            E0F;
-$body = '</head><body>';
-$end = '</body></html>';
-
-function tag($tag, $txt) {
-    return "<$tag>" . $txt . "</$tag>";
-}
+use Illuminate\Http\Response;
 
 class HelloController extends Controller
 {
-    //
-    public function index() {
-        global $head, $style, $body, $end;
-
-        $html = $head . tag('title', 'Hello/index') . $style .
-            $body
-            . tag('h1', 'Index') . tag('p', 'this is Index page')
-            . '<a href="/hello/other">go to Other page</a>'
-            . $end;
-        return $html;
+    public function index(Request $request) {
+        $data = [
+                  ['name'=>'山田たろう', 'mail'=>'taro@yamada'],
+                  ['name'=>'田中はなこ', 'mail'=>'hanako@flower'],
+                  ['name'=>'青木大地', 'mail'=>'daiti@yamada'],
+                ];
+        return view('hello.index', ['message' =>'Hello']);
     }
 
-    public function other() {
-        global $head, $style, $body, $end;
-
-        $html = $head
-            . tag('title', 'Hello/Other') 
-            . $style 
-            . $body
-            . $head
-            . tag('h1', 'Other') . tag('p', 'this is Other page')
-            . $end;
-        return $html;
+    public function post(Request $request) {
+        return view('hello.index', ['msg'=>$request->msg]);
     }
 }
+
+
