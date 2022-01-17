@@ -1,4 +1,11 @@
 @extends('layouts.helloapp')
+<style>
+  .pagination { font-size:10pt; }
+  .pagination li { display:inline-block }
+  tr th a:link { color:white; }
+  tr th a:hover { color:white; }
+  tr th a:active { color:white; }
+</style>
 @section('title', 'Index')
 
 @section('menubar')
@@ -7,20 +14,22 @@
 @endsection
 
 @section('content')
-  <p>{{$msg}}</p>
-  @if (count($errors) > 0)
-   <p>入力に誤りがあります。再入力してください。</p>
-  @endif
-  <form action="/hello" method="post">
-    <table>
-      @csrf
-      @if ($errors->has('msg'))
-        <tr><th>ERROR</th><td>{{$errors->first('msg')}}</td></tr>
-      @endif
-      <tr><th>Message: </th><td><input type="text" name="msg" value{{old('msg')}}></td></tr>
-      <tr><th></th><td><input type="submit" value="send"></td></tr>
-    </table>
-  </form>
+  <table>
+    <tr><th>Name</th><th>Mail</th><th>Age</th>
+    <tr>
+      <th><a href="/hello?sort=name">name</a></th>
+      <th><a href="/hello?sort=email">mail</a></th>
+      <th><a href="/hello?sort=age">age</a></th>
+    </tr>
+    @foreach ($items as $item)
+      <tr>
+        <td>{{$item->name}}</td>
+        <td>{{$item->email}}</td>
+        <td>{{$item->age}}</td>
+      </tr>
+    @endforeach
+  </table>
+  {{ $items->appends(['sort' => $sort])->links() }}
 @endsection
 
 @section('footer')

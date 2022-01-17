@@ -11,18 +11,21 @@
           margin:-20px 0px -30px 0px; letter-spacing:-4pt;}
       ul {font-size:12pt;}
       hr {margin: 25px 100px; border-top: 1px dashed #ddd;}
+      th {background-color:#999; color:#fff; padding:5px 10px;}
+      td {border: solid 1px #aaa; color:#999; padding:5px 10px;}
       .menutitle {font-size:14pt; font-weight:bold; margin: 0px;}
       .content{margin:10px;}
       .footer{ text-align:right; font-size:10pt; margin:10px;
                 border-bottom:solid 1px #ccc; color:#ccc;}
   </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
   <h1>@yield('title')</h1>
   @section('menubar')
   <h2 class="menutitle">※メニュー<h2>
-  <ul>@section('menubar')
-    インデックスページ
+  <ul>
+    <li>@show</li>
   <ul>
   <hr size="1">
   <div class="content">
